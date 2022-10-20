@@ -18,3 +18,12 @@ export const createUser = async (user) => {
         return error
     }
 }
+
+export const getUsers = async () => {
+    try {
+        const {data} = await axios.get(`${URL_API}/users`)
+        return data;
+    } catch (error) {
+        return []
+    }
+}
