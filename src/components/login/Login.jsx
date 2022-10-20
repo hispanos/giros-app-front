@@ -1,13 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import useForm from '../../hooks/useForm';
 import { getLogin } from '../../services/users';
 import './style.scss'
 import Swal from 'sweetalert2';
 import {useNavigate, Link} from 'react-router-dom'
+import { redirectUser } from '../../utils/session';
 
 const Login = () => {
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const [dataForm, handleChangeInput, reset] = useForm({
+        user: '',
+        password: ''
+    });
+
+    useEffect(() => {
+        //redirect if not session
+        redirectUser(navigate);
+    }, [])
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,11 +33,6 @@ const Login = () => {
             }
         }
     }
-
-    const [dataForm, handleChangeInput, reset] = useForm({
-        user: '',
-        password: ''
-    })
 
     return (
         <div className="login__container">

@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import useForm from '../../hooks/useForm';
 import { createUser } from '../../services/users';
 import './style.scss'
 import Swal from 'sweetalert2';
 import { useNavigate, Link } from 'react-router-dom'
+import { redirectUser } from '../../utils/session';
 
 const Register = () => {
     const navigate = useNavigate()
+
+    useEffect(() => {
+        //redirect if not session
+        redirectUser(navigate);
+    }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
