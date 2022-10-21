@@ -4,11 +4,12 @@ import useForm from '../../hooks/useForm';
 import { parseDate } from '../../utils/stringFuntions';
 import { saveTransfer } from '../../services/transfers';
 import Swal from 'sweetalert2';
+import { useOutletContext } from 'react-router-dom';
 
 const NewTransfer = () => {
 
   const [users, setUsers] = useState([]);
-  const [userSession, setUserSession] = useState({});
+  const [userSession] = useOutletContext();
 
   const [dataForm, handleChangeInput, reset] = useForm({
     receiptId: '',
@@ -21,9 +22,7 @@ const NewTransfer = () => {
 
   const getData = async () => {
     const response = await getUsers();
-    const dummieUser = JSON.parse(sessionStorage.getItem('user'));
-    setUserSession(dummieUser);
-    const result = response.filter(e => e.id !== dummieUser.id);
+    const result = response.filter(e => e.id !== userSession.id);
     setUsers(result);
   }
 

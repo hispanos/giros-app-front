@@ -3,6 +3,7 @@ import './style.scss'
 import { getTransferReceipts, getTransferSends } from '../../services/transfers'
 import { getUsers } from '../../services/users';
 import { numberToMoney } from '../../utils/stringFuntions';
+import { useOutletContext } from 'react-router-dom';
 
 const Transfer = () => {
 
@@ -10,17 +11,18 @@ const Transfer = () => {
   const [users, setUsers] = useState([]);
   const [transferReceipts, setTransferReceipts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [userSession] = useOutletContext();
 
   useEffect(() => {
     getData();
+    console.log(userSession)
   }, [])
 
   const getData = async () => {
-    const user = JSON.parse(sessionStorage.getItem('user'));
 
     const [dataSends, dataReceipts, dataUsers] = await Promise.all([
-      getTransferSends(user.id),
-      getTransferReceipts(user.id),
+      getTransferSends(userSession.id),
+      getTransferReceipts(userSession.id),
       getUsers()
     ]);
 

@@ -8,10 +8,20 @@ const Home = () => {
   const navigate = useNavigate();
   const [reload, setReload] = useState(false)
 
+  const [userSession, setUserSession] = useState({});
+
   const handleCloseSession = () => {
     sessionStorage.clear();
     setReload(!reload)
   }
+
+  useEffect(() => {
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    if (user) {
+      setUserSession(user);
+    }
+  }, [])
+
 
   useEffect(() => {
     protectedRoute(navigate)
@@ -19,8 +29,11 @@ const Home = () => {
 
   return (
     <>
-      <Header handleCloseSession={handleCloseSession} />
-      <Outlet />
+      <Header
+        handleCloseSession={handleCloseSession}
+        userSession={userSession}
+      />
+      <Outlet context={[userSession]} />
     </>
   )
 }
