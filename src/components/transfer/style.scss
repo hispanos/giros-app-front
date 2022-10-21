@@ -23,4 +23,21 @@
             border: 1px solid #000;
         }
     }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 10px;
+        padding-left: 20px;
+
+        button {
+            max-width: 200px;
+            border: none;
+            border-radius: 20px;
+            padding: 5px 10px;
+            background-color: #10ac84;
+            cursor: pointer;
+        }
+    }
 }

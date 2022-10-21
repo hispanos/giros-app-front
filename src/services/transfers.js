@@ -1,7 +1,7 @@
 import axios from "axios";
+const URL_API = 'http://localhost:5000/transfers';
 
 export const getTransferSends = async (senderId) => {
-    const URL_API = 'http://localhost:5000/transfers';
     try {
         const response = await axios.get(`${URL_API}?senderId=${senderId}`)
         return response.data;
@@ -12,12 +12,20 @@ export const getTransferSends = async (senderId) => {
 }
 
 export const getTransferReceipts = async (receiptId) => {
-    const URL_API = 'http://localhost:5000/transfers';
     try {
         const response = await axios.get(`${URL_API}?receiptId=${receiptId}`)
         return response.data;
     } catch (error) {
         console.log(error);
         return []
+    }
+}
+
+export const saveTransfer = async (transfer) => {
+    try {
+        const {data} = await axios.post(URL_API, transfer)
+        return data;
+    } catch (error) {
+        return error;
     }
 }
