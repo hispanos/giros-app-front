@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './style.scss'
 import { getTransferReceipts, getTransferSends } from '../../services/transfers'
 import { getUsers } from '../../services/users';
+import { numberToMoney } from '../../utils/stringFuntions';
 
 const Transfer = () => {
 
@@ -66,7 +67,7 @@ const Transfer = () => {
                       <td className='transfer__table__row'>{
                         receipt.name
                       }</td>
-                      <td className='transfer__table__row'>{element.value}</td>
+                      <td className='transfer__table__row'>{numberToMoney(element.value)}</td>
                     </tr>
                   )
                 })
@@ -102,7 +103,7 @@ const Transfer = () => {
                       <td className='transfer__table__row'>{
                         sender.name
                       }</td>
-                      <td className='transfer__table__row'>{element.value}</td>
+                      <td className='transfer__table__row'>{numberToMoney(element.value)}</td>
                     </tr>
                   )
                 })
