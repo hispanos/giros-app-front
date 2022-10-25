@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { capitalize } from '../../utils/stringFuntions';
 import './style.scss'
 
-const Header = ({ handleCloseSession, userSession }) => {
+const Header = ({ handleCloseSession, userSession, showTitle, background }) => {
 
     return (
         <>
-            <div className="header">
-                <h1>App de Giros</h1>
+            <div className={`header ${background}`}>
+                {showTitle && <h1>App de Giros</h1>}
                 <div className="header__user">
                     <span>{capitalize(userSession.name)}</span>
                     <button onClick={handleCloseSession}>
